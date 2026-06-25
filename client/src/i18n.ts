@@ -12,7 +12,7 @@ const STRINGS = {
     es: 'Todos reciben una palabra secreta. Uno de ustedes es el Impostor. Den pistas y encuéntrenlo… antes de que él descubra la palabra.',
   },
   yourName: { en: 'Your name', es: 'Tu nombre' },
-  namePlaceholder: { en: 'e.g. Maya', es: 'p. ej. Maya' },
+  namePlaceholder: { en: 'e.g. Javier', es: 'p. ej. Javier' },
   yourPfp: { en: 'Your profile pic', es: 'Tu foto de perfil' },
   randomize: { en: 'Randomize', es: 'Aleatorio' },
   noAvatars: { en: 'Add PNGs to server/avatars/ for more', es: 'Agrega PNGs en server/avatars/ para más' },
