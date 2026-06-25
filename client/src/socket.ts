@@ -6,7 +6,10 @@ import { IS_DEMO } from './demoFlag';
 import type { ClientToServerEvents, ServerToClientEvents } from './types';
 
 // Same-origin in production; the Vite dev server proxies /socket.io to :3001.
-export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io({
-  autoConnect: !IS_DEMO,
-  transports: ['websocket', 'polling'],
-});
+export const socket: Socket<ServerToClientEvents, ClientToServerEvents> = io(
+  import.meta.env.DEV ? 'http://localhost:3001' : 'https://impostor-abra.onrender.com',
+  {
+    autoConnect: !IS_DEMO,
+    transports: ['websocket', 'polling'],
+  },
+);
