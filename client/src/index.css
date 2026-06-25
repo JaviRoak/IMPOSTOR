@@ -1,0 +1,138 @@
+/* client/src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --grad: linear-gradient(120deg, #FB0236, #FF3D63 52%, #FF7A4D);
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-base font-body text-ink antialiased;
+  /* Impostor watermark background image + a dark wash so foreground stays readable */
+  background-image:
+    linear-gradient(rgba(10, 11, 18, 0.72), rgba(10, 11, 18, 0.86)),
+    radial-gradient(60rem 40rem at 15% -10%, rgba(251, 2, 54, 0.18), transparent 60%),
+    radial-gradient(50rem 35rem at 110% 10%, rgba(255, 61, 99, 0.12), transparent 60%),
+    url('/bg.png');
+  background-position: center, center, center, center;
+  background-size: cover, auto, auto, cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+@layer components {
+  /* Chunky toy-like panel: fat rounding, solid fill, soft drop + inner highlight */
+  .glass {
+    @apply rounded-[28px] border-2 border-white/10 bg-raised/85 backdrop-blur-md;
+    box-shadow:
+      inset 0 2px 0 rgba(255, 255, 255, 0.08),
+      0 10px 0 -4px rgba(0, 0, 0, 0.35),
+      0 20px 40px -16px rgba(0, 0, 0, 0.7);
+  }
+
+  /* Base button — rounded, bold, springy */
+  .btn {
+    @apply rounded-2xl px-6 py-3 font-extrabold tracking-wide transition-all duration-100
+      focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-sky/40
+      disabled:opacity-40 disabled:pointer-events-none;
+  }
+
+  /* The signature Gartic-style "pressable" 3D button: a solid colour with a
+     darker bottom edge that compresses when pressed. */
+  .btn-hero {
+    @apply btn text-white;
+    background: var(--grad);
+    background-size: 180% 180%;
+    border-bottom: 4px solid rgba(150, 0, 24, 0.9);
+    box-shadow:
+      0 6px 0 0 rgba(120, 0, 20, 0.9),
+      0 10px 18px -6px rgba(251, 2, 54, 0.55);
+    transform: translateY(0);
+  }
+  .btn-hero:hover:not(:disabled) {
+    filter: brightness(1.06);
+  }
+  .btn-hero:active:not(:disabled) {
+    transform: translateY(5px);
+    box-shadow: 0 1px 0 0 rgba(120, 0, 20, 0.9);
+  }
+
+  .btn-ghost {
+    @apply btn bg-white/10 text-ink;
+    border-bottom: 4px solid rgba(0, 0, 0, 0.35);
+    box-shadow: 0 5px 0 0 rgba(0, 0, 0, 0.3);
+    transform: translateY(0);
+  }
+  .btn-ghost:hover:not(:disabled) {
+    @apply bg-white/[0.16];
+  }
+  .btn-ghost:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.3);
+  }
+
+  .input {
+    @apply w-full rounded-2xl border-2 border-white/10 bg-base/70 px-4 py-3 text-ink font-medium
+      placeholder:text-muted/60 focus:border-brand focus:outline-none focus:ring-4 focus:ring-brand/25;
+  }
+  .chip {
+    @apply inline-flex items-center gap-1.5 rounded-chip border border-white/10 px-3 py-1 text-sm font-bold;
+  }
+}
+
+/* The table — the disc players orbit */
+.table-disc {
+  background:
+    radial-gradient(circle at 50% 32%, rgba(255, 255, 255, 0.06), transparent 55%),
+    radial-gradient(circle at 50% 50%, #241019, #1a0c12 70%);
+  border: 2px solid rgba(251, 2, 54, 0.35);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.06),
+    inset 0 0 60px -20px rgba(251, 2, 54, 0.5),
+    0 30px 60px -30px rgba(0, 0, 0, 0.85),
+    0 0 90px -30px rgba(251, 2, 54, 0.4);
+}
+
+/* Active-turn ring — pulses to make whose turn it is unmistakable */
+.turn-ring {
+  box-shadow: 0 0 0 3px #14151f, 0 0 0 6px #FB0236, 0 0 24px 4px rgba(251, 2, 54, 0.6);
+  animation: turnpulse 1.25s ease-in-out infinite;
+}
+@keyframes turnpulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 3px #14151f, 0 0 0 5px #FB0236, 0 0 18px 2px rgba(251, 2, 54, 0.45);
+  }
+  50% {
+    box-shadow: 0 0 0 3px #14151f, 0 0 0 8px #FB0236, 0 0 34px 8px rgba(251, 2, 54, 0.85);
+  }
+}
+
+/* Envelope hold-to-open progress (GDD §6 word reveal) */
+.hold-ring {
+  background: conic-gradient(var(--grad-stop, #FB0236) calc(var(--p, 0) * 1%), rgba(255, 255, 255, 0.12) 0);
+}
+
+.word-display {
+  @apply font-display font-extrabold tracking-tight;
+  background: var(--grad);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
