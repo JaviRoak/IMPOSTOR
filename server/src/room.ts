@@ -403,11 +403,7 @@ export class Room {
 
     // Skip won the vote → nobody is removed.
     if (ejectedId === SKIP) {
-      if (this.clueRound >= 2) {
-        this.finishRound('impostor', null, null, counts, this.t('skippedEscape'));
-      } else {
-        this.nextClueRound(counts, this.t('voteSkipped'));
-      }
+      this.nextClueRound(counts, this.t('voteSkipped'));
       return;
     }
 
@@ -424,7 +420,8 @@ export class Room {
       this.toPhase('finalGuess', TIMERS.finalGuess, () => this.submitGuess(ejectedId, this.liveGuess));
     } else {
       this.get(ejectedId)!.alive = false;
-      if (this.alive().length <= 3) {
+      const remainingAlive = this.alive().length;
+      if (remainingAlive <= 2) {
         this.finishRound('impostor', ejectedId, null, counts, this.t('wrongTooFew'));
       } else {
         this.nextClueRound(counts, this.t('wrongPick'));

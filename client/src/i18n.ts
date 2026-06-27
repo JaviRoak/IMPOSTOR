@@ -15,7 +15,7 @@ const STRINGS = {
   namePlaceholder: { en: 'e.g. Javier', es: 'p. ej. Javier' },
   yourPfp: { en: 'Your profile pic', es: 'Tu foto de perfil' },
   randomize: { en: 'Randomize', es: 'Aleatorio' },
-  noAvatars: { en: 'Add PNGs to server/avatars/ for more', es: 'Agrega PNGs en server/avatars/ para más' },
+  noAvatars: { en: 'Patch 0.2', es: 'Parche 0.2' },
   openTable: { en: 'Open a table', es: 'Crear una mesa' },
   orJoin: { en: 'or join friends', es: 'o únete a tus amigos' },
   join: { en: 'Join', es: 'Unirse' },
